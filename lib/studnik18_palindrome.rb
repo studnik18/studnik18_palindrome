@@ -1,17 +1,25 @@
 require "studnik18_palindrome/version"
 
-class String
+module Studnik18Palindrome
   def palindrome?
-    processed_content == processed_content.reverse
-  end
-
-  def letters
-    self.chars.select { |c| c.match(/[a-z]/i) }.join
+    if processed_content.empty?
+      false
+    else
+      processed_content == processed_content.reverse
+    end
   end
 
   private
 
     def processed_content
-      self.letters.downcase
+      self.to_s.scan(/[a-z0-9]/i).join.downcase
     end
+end
+
+class String
+  include Studnik18Palindrome
+end
+
+class Integer
+  include Studnik18Palindrome
 end
